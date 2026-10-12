@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartResolve AI – Student Complaint Management System</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231e40af'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-announcement">
+    <div>
+      <span class="badge-pill">COLLEGE PORTAL</span>
+      SmartResolve AI: Autonomous Grievance Triage & Resolution System
+    </div>
+    <div class="top-actions">
+      <button id="btn-quick-sample-data" class="btn-ghost-sm" title="Populate demo complaints">
+        📥 Load Sample Complaints
+      </button>
+      <button id="btn-quick-clear-data" class="btn-ghost-sm" title="Clear all local data">
+        🗑️ Clear Data
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Navigation Header -->
+  <header class="main-header">
+    <div class="container">
+      <div class="nav-wrapper">
+        <a class="brand-group" id="brand-home-link" href="#dashboard">
+          <div class="brand-icon-box">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <h1>SmartResolve AI</h1>
+            <p>Campus Student Grievance Portal</p>
+          </div>
+        </a>
+
+        <!-- Navigation Tabs -->
+        <nav>
+          <ul class="nav-tabs">
+            <li>
+              <button class="nav-link active" data-tab="dashboard">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                </svg>
+                Dashboard
+              </button>
+            </li>
+            <li>
+              <button class="nav-link" data-tab="submit">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                </svg>
+                File Complaint
+              </button>
+            </li>
+            <li>
+              <button class="nav-link" data-tab="track">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+                Track Status
+              </button>
+            </li>
+            <li>
+              <button class="nav-link" data-tab="admin">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+                </svg>
+                Admin Desk
+                <span id="nav-admin-badge" class="badge-counter">0</span>
+              </button>
+            </li>
+            <li>
+              <button class="nav-link" data-tab="about-ai">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                AI Architecture
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="container">
+
+    <!-- ==========================================
+         TAB 1: HOME DASHBOARD
+         ========================================== -->
+    <section id="view-dashboard" class="tab-view active">
+      <!-- Hero Banner -->
+      <div class="hero-card">
+        <div class="hero-content">
+          <div class="hero-pill">
+            <span>✨ AI-Powered Grievance Resolution</span>
+          </div>
+          <h2 class="hero-title">Campus Facilities & Student Grievance Resolution</h2>
+          <p class="hero-desc">
+            Welcome to SmartResolve AI. Submit maintenance, water, electricity, Wi-Fi, and cleanliness issues with instant automated categorization and priority assessment.
+          </p>
+          <div class="hero-actions">
+            <button class="btn btn-white" data-action="go-to-submit">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path>
+              </svg>
+              File a New Complaint
+            </button>
+            <button class="btn btn-outline-white" data-action="go-to-track">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+              Track Complaint by ID
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Transparency Disclosure Banner -->
+      <div class="ai-notice-box">
+        <div class="ai-notice-icon">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+          </svg>
+        </div>
+        <div class="ai-notice-text">
+          <h4>Explainable AI Triage Architecture</h4>
+          <p>
+            SmartResolve AI operates on an explainable, deterministic natural language keyword heuristic algorithm. It instantly categorizes complaints into <strong>Maintenance, Electricity, Water, Wi-Fi, or Cleanliness</strong>, computes urgency scores, and outputs campus administrative recommendations without external API dependencies or privacy leaks.
+          </p>
+        </div>
+      </div>
+
+      <!-- 4 Stats Cards -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon blue">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+            </svg>
+          </div>
+          <div class="stat-info">
+            <div id="stat-total" class="stat-value">0</div>
+            <div class="stat-label">Total Complaints</div>
+            <div class="stat-meta">Lifetime logged</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon amber">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <div class="stat-info">
+            <div id="stat-pending" class="stat-value">0</div>
+            <div class="stat-label">Pending Review</div>
+            <div class="stat-meta">Awaiting assignment</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon sky">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <div class="stat-info">
+            <div id="stat-in-progress" class="stat-value">0</div>
+            <div class="stat-label">In Progress</div>
+            <div class="stat-meta">Work order issued</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon emerald">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <div class="stat-info">
+            <div id="stat-resolved" class="stat-value">0</div>
+            <div class="stat-label">Resolved</div>
+            <div id="stat-rate" class="stat-meta">0% resolution rate</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category Distribution Bar -->
+      <div class="section-header">
+        <h2>Complaints by Category</h2>
+        <span class="form-hint">Real-time breakdown</span>
+      </div>
+      <div class="cat-stat-bar" id="cat-distribution-bar">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Recent Complaints Section -->
+      <div class="card">
+        <div class="card-header">
+          <h3>Recent Complaints</h3>
+          <button class="btn btn-secondary btn-sm" data-action="go-to-admin">
+            View All in Admin Portal →
+          </button>
+        </div>
+        <div class="card-body" style="padding: 0;">
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Student</th>
+                  <th>Complaint & Location</th>
+                  <th>Category</th>
+                  <th>Priority</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="recent-complaints-tbody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         TAB 2: STUDENT COMPLAINT FORM
+         ========================================== -->
+    <section id="view-submit" class="tab-view">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h3>Submit a New Student Grievance</h3>
+            <p class="form-hint">Fill in the incident details. Our AI engine will analyze urgency and assign the correct department automatically.</p>
+          </div>
+          <span class="badge badge-cat">Step 1 of 1</span>
+        </div>
+        <div class="card-body">
+          <form id="complaint-form" novalidate>
+            <div class="form-grid">
+              <!-- Student Name -->
+              <div class="form-group">
+                <label class="form-label" for="studentName">
+                  Student Full Name <span class="req">*</span>
+                </label>
+                <input type="text" id="studentName" class="form-control" placeholder="e.g. Aarav Sharma" required>
+              </div>
+
+              <!-- Student Roll No / ID -->
+              <div class="form-group">
+                <label class="form-label" for="studentRoll">
+                  Roll / Student ID Number <span class="req">*</span>
+                </label>
+                <input type="text" id="studentRoll" class="form-control" placeholder="e.g. CS-2024-041" required>
+              </div>
+
+              <!-- Student Email -->
+              <div class="form-group">
+                <label class="form-label" for="studentEmail">
+                  Campus Email Address <span class="req">*</span>
+                </label>
+                <input type="email" id="studentEmail" class="form-control" placeholder="e.g. student@campus.edu" required>
+              </div>
+
+              <!-- Location / Room -->
+              <div class="form-group">
+                <label class="form-label" for="location">
+                  Campus Location / Block / Room <span class="req">*</span>
+                </label>
+                <input type="text" id="location" class="form-control" placeholder="e.g. Hostel Block B, Room 204 or Library 2nd Floor" required>
+              </div>
+
+              <!-- Category Selection (Auto or Manual) -->
+              <div class="form-group form-full">
+                <label class="form-label" for="categorySelect">
+                  Category Mode
+                  <span class="form-hint">AI can auto-classify or you can specify manually</span>
+                </label>
+                <select id="categorySelect" class="form-control">
+                  <option value="auto" selected>✨ Auto-Detect with AI (Recommended)</option>
+                  <option value="Water">Water (Plumbing & Sanitation)</option>
+                  <option value="Electricity">Electricity (Power & Wiring)</option>
+                  <option value="Wi-Fi">Wi-Fi (Network & Internet)</option>
+                  <option value="Cleanliness">Cleanliness (Housekeeping & Waste)</option>
+                  <option value="Maintenance">Maintenance (Civil & Furniture)</option>
+                  <option value="Other">Other / General Administration</option>
+                </select>
+              </div>
+
+              <!-- Complaint Title -->
+              <div class="form-group form-full">
+                <label class="form-label" for="complaintTitle">
+                  Complaint Subject / Title <span class="req">*</span>
+                </label>
+                <input type="text" id="complaintTitle" class="form-control" placeholder="e.g. Severe water pipe leakage under washbasin" required>
+              </div>
+
+              <!-- Detailed Description -->
+              <div class="form-group form-full">
+                <label class="form-label" for="complaintDescription">
+                  Detailed Description of Issue <span class="req">*</span>
+                  <span class="form-hint">Describe the problem, severity, and any hazards</span>
+                </label>
+                <textarea id="complaintDescription" class="form-control" rows="4" placeholder="Provide specific details. Mention whether it is urgent, sparks are visible, water is overflowing, etc." required></textarea>
+              </div>
+            </div>
+
+            <!-- Live AI Analysis Preview Box -->
+            <div id="ai-live-preview-box" class="ai-live-box">
+              <div class="ai-live-header">
+                <div class="ai-live-badge">
+                  <span>⚡ AI Live Triage Preview</span>
+                </div>
+                <span id="ai-confidence-indicator" class="form-hint">Awaiting input...</span>
+              </div>
+              
+              <div class="ai-live-grid">
+                <div class="ai-live-item">
+                  <div class="label">Predicted Category</div>
+                  <div id="ai-pred-category" class="val">—</div>
+                </div>
+                <div class="ai-live-item">
+                  <div class="label">Priority Level</div>
+                  <div id="ai-pred-priority" class="val">—</div>
+                </div>
+                <div class="ai-live-item">
+                  <div class="label">Assigned Department</div>
+                  <div id="ai-pred-dept" class="val">—</div>
+                </div>
+              </div>
+
+              <div class="ai-action-preview">
+                <strong>Suggested Resolution Action:</strong>
+                <span id="ai-pred-action">Type your issue title & description above to see live automated categorization, urgency scoring, and suggested response actions.</span>
+              </div>
+            </div>
+
+            <!-- Submit Buttons -->
+            <div style="display: flex; gap: 1rem; margin-top: 1.5rem; justify-content: flex-end;">
+              <button type="button" id="btn-reset-form" class="btn btn-secondary">
+                Reset Form
+              </button>
+              <button type="submit" id="btn-submit-complaint" class="btn btn-primary">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                </svg>
+                Submit Complaint
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         TAB 3: COMPLAINT TRACKING
+         ========================================== -->
+    <section id="view-track" class="tab-view">
+      <div class="tracking-search-box">
+        <h3>Track Complaint Status</h3>
+        <p class="form-hint">Enter your unique Complaint ID (e.g., CMP-2026-1001) to view real-time administrative progress and resolution notes.</p>
+        
+        <div class="tracking-input-row">
+          <input type="text" id="track-search-input" class="form-control" placeholder="Enter Complaint ID (e.g. CMP-2026-1001)">
+          <button id="btn-track-search" class="btn btn-primary">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+            Track Status
+          </button>
+        </div>
+
+        <div class="sample-ids-list">
+          <span>Click to test sample IDs:</span>
+          <span id="quick-track-chips"></span>
+        </div>
+      </div>
+
+      <!-- Track Result Container -->
+      <div id="track-result-container">
+        <!-- Rendered dynamically -->
+        <div class="empty-state">
+          <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+          <h3>Search for your Complaint</h3>
+          <p>Provide your ticket ID above to check administrative assignment, resolution status, and AI triage details.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         TAB 4: ADMIN DASHBOARD
+         ========================================== -->
+    <section id="view-admin" class="tab-view">
+      <div class="section-header">
+        <div>
+          <h2>Campus Administration Management Portal</h2>
+          <p class="form-hint">Filter grievances, triage priorities, assign work orders, and update resolution statuses.</p>
+        </div>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <button id="btn-admin-export" class="btn btn-secondary btn-sm" title="Export records as JSON">
+            💾 Export Data
+          </button>
+          <button id="btn-admin-seed" class="btn btn-secondary btn-sm" title="Load sample records">
+            📥 Load Sample Data
+          </button>
+          <button id="btn-admin-clear" class="btn btn-danger btn-sm" title="Purge database">
+            🗑️ Clear All
+          </button>
+        </div>
+      </div>
+
+      <!-- Filter Controls Bar -->
+      <div class="filter-bar">
+        <div class="filter-group">
+          <!-- Search input -->
+          <div class="search-input-wrapper">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+            <input type="text" id="admin-search-input" class="form-control" placeholder="Search by ID, student, keyword...">
+          </div>
+
+          <!-- Status Filter -->
+          <select id="admin-filter-status" class="form-control" style="width: auto;">
+            <option value="all">All Statuses</option>
+            <option value="Pending">Pending</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Resolved">Resolved</option>
+          </select>
+
+          <!-- Category Filter -->
+          <select id="admin-filter-category" class="form-control" style="width: auto;">
+            <option value="all">All Categories</option>
+            <option value="Water">Water</option>
+            <option value="Electricity">Electricity</option>
+            <option value="Wi-Fi">Wi-Fi</option>
+            <option value="Cleanliness">Cleanliness</option>
+            <option value="Maintenance">Maintenance</option>
+            <option value="Other">Other</option>
+          </select>
+
+          <!-- Priority Filter -->
+          <select id="admin-filter-priority" class="form-control" style="width: auto;">
+            <option value="all">All Priorities</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <!-- Sort Dropdown -->
+          <select id="admin-sort-by" class="form-control" style="width: auto;">
+            <option value="newest">Sort: Newest First</option>
+            <option value="oldest">Sort: Oldest First</option>
+            <option value="priority">Sort: Highest Priority First</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Admin Complaints Table -->
+      <div class="card">
+        <div class="card-body" style="padding: 0;">
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Complaint ID</th>
+                  <th>Date</th>
+                  <th>Student Info</th>
+                  <th>Location</th>
+                  <th>Title & Description</th>
+                  <th>Category</th>
+                  <th>Priority</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-complaints-tbody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         TAB 5: ABOUT AI & ARCHITECTURE
+         ========================================== -->
+    <section id="view-about-ai" class="tab-view">
+      <div class="card">
+        <div class="card-header">
+          <h3>Transparent AI Architecture & System Design</h3>
+          <span class="badge badge-cat">Technical Disclosure</span>
+        </div>
+        <div class="card-body" style="line-height: 1.7;">
+          <h4 style="margin-bottom: 0.5rem; color: var(--primary-900);">1. How the Current AI Engine Works (Rule-Based NLP)</h4>
+          <p style="margin-bottom: 1rem; color: var(--slate-600);">
+            In this demonstration, <strong>SmartResolve AI</strong> uses an explainable, deterministic natural language keyword matching and heuristic prioritization algorithm.
+            When a student enters a complaint, the engine parses the text against curated facility dictionaries:
+          </p>
+          <ul style="margin-left: 1.5rem; margin-bottom: 1.25rem; color: var(--slate-700);">
+            <li><strong>Water:</strong> detects terms like <em>leak, tap, pipe, washroom, toilet, sink, overflow, drinking water</em>.</li>
+            <li><strong>Electricity:</strong> detects terms like <em>power, spark, switch, socket, blackout, bulb, fan, wiring, shock</em>.</li>
+            <li><strong>Wi-Fi:</strong> detects terms like <em>internet, network, router, portal, slow, latency, captive portal, DNS</em>.</li>
+            <li><strong>Cleanliness:</strong> detects terms like <em>garbage, trash, dustbin, smell, pest, insects, sanitary, hygienic</em>.</li>
+            <li><strong>Maintenance:</strong> detects terms like <em>broken door, lock, chair, desk, bench, elevator, window, paint</em>.</li>
+          </ul>
+
+          <h4 style="margin-bottom: 0.5rem; color: var(--primary-900);">2. Urgency & Priority Detection Rules</h4>
+          <p style="margin-bottom: 1rem; color: var(--slate-600);">
+            Priorities are evaluated using safety and disruption risk indicators:
+          </p>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+            <div style="background: var(--priority-high-bg); border: 1px solid var(--priority-high-border); padding: 1rem; border-radius: var(--radius-md);">
+              <strong style="color: var(--priority-high-text);">🚨 High Priority</strong>
+              <p style="font-size: 0.8125rem; color: var(--priority-high-text); margin-top: 0.25rem;">
+                Triggered by hazard or emergency keywords (e.g., <em>spark, electric shock, fire, flood, burst pipe, dangerous</em>). Action dispatched immediately.
+              </p>
+            </div>
+            <div style="background: var(--priority-med-bg); border: 1px solid var(--priority-med-border); padding: 1rem; border-radius: var(--radius-md);">
+              <strong style="color: var(--priority-med-text);">⚠️ Medium Priority</strong>
+              <p style="font-size: 0.8125rem; color: var(--priority-med-text); margin-top: 0.25rem;">
+                Triggered by operational disruption terms (e.g., <em>not working, exam tomorrow, foul odor, frequent disconnect</em>). Resolution within 24-48 hrs.
+              </p>
+            </div>
+            <div style="background: var(--priority-low-bg); border: 1px solid var(--priority-low-border); padding: 1rem; border-radius: var(--radius-md);">
+              <strong style="color: var(--priority-low-text);">ℹ️ Low Priority</strong>
+              <p style="font-size: 0.8125rem; color: var(--priority-low-text); margin-top: 0.25rem;">
+                Routine requests, cosmetic fixes, minor squeaks, or general inquiries without safety disruption. Resolution within 3-5 business days.
+              </p>
+            </div>
+          </div>
+
+          <h4 style="margin-bottom: 0.5rem; color: var(--primary-900);">3. Transitioning to a Large Language Model (LLM) Backend</h4>
+          <p style="margin-bottom: 1rem; color: var(--slate-600);">
+            The codebase is designed with a clean, decoupled asynchronous interface in <code>js/aiAnalysis.js</code>. 
+            To connect a production generative AI model (such as Google Gemini, Claude, or OpenAI), you can replace the internal rule engine with a secure backend API call:
+          </p>
+
+          <pre style="background: var(--slate-900); color: #e2e8f0; padding: 1rem; border-radius: var(--radius-md); font-family: monospace; font-size: 0.8125rem; overflow-x: auto; margin-bottom: 1.5rem;">
+// In js/aiAnalysis.js - Simply forward to your secure backend endpoint:
+async function analyzeComplaint({ title, description, location }) {
+  const response = await fetch('/api/complaints/analyze', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ title, description, location })
+  });
+  return await response.json();
+}
+          </pre>
+
+          <h4 style="margin-bottom: 0.5rem; color: var(--primary-900);">4. Privacy & Security Safeguards</h4>
+          <ul style="margin-left: 1.5rem; color: var(--slate-700);">
+            <li><strong>Zero Third-Party Data Leakage:</strong> In this client-side demonstration, complaints remain strictly inside your browser's <code>localStorage</code>.</li>
+            <li><strong>No Hardcoded API Keys:</strong> In adherence to web application security best practices, no secret API tokens or passwords are stored in frontend files.</li>
+            <li><strong>Demo & Auditing Controls:</strong> Administrators can reset, seed, or backup complaints with full data ownership.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================
+       MODAL 1: SUBMISSION SUCCESS CONFIRMATION
+       ========================================== -->
+  <div id="modal-success" class="modal-overlay">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>Complaint Filed Successfully</h3>
+        <button class="modal-close-btn" data-close-modal="modal-success">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="success-banner">
+          <div class="success-icon-wrap">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+            </svg>
+          </div>
+          <h4 style="font-size: 1.25rem; font-weight: 800; color: var(--slate-900);">Grievance Registered with AI Triage</h4>
+          <p style="font-size: 0.875rem; color: var(--slate-500); margin-top: 0.25rem;">
+            Please note your unique Complaint ID to track status updates from the maintenance office.
+          </p>
+
+          <div class="complaint-id-badge-large" id="modal-success-id">
+            CMP-2026-1001
+          </div>
+
+          <div style="margin-bottom: 1.25rem;">
+            <button id="btn-copy-id" class="btn btn-secondary btn-sm">
+              📋 Copy Complaint ID
+            </button>
+          </div>
+
+          <!-- Quick AI Summary Box -->
+          <div style="background: var(--slate-50); border: 1px solid var(--slate-200); border-radius: var(--radius-md); padding: 1rem; text-align: left; font-size: 0.8125rem;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
+              <span style="color: var(--slate-500);">Assigned Category:</span>
+              <strong id="modal-success-category" style="color: var(--primary-800);">—</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
+              <span style="color: var(--slate-500);">Assigned Urgency:</span>
+              <strong id="modal-success-priority" style="color: var(--slate-800);">—</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <span style="color: var(--slate-500);">Routing To:</span>
+              <strong id="modal-success-dept" style="color: var(--slate-800);">—</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-close-modal="modal-success">File Another</button>
+        <button id="btn-modal-go-track" class="btn btn-primary">
+          🔍 Track This Complaint
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL 2: ADMIN MANAGE / UPDATE COMPLAINT
+       ========================================== -->
+  <div id="modal-admin-manage" class="modal-overlay">
+    <div class="modal-dialog" style="max-width: 650px;">
+      <div class="modal-header">
+        <h3 id="modal-manage-title">Manage Complaint</h3>
+        <button class="modal-close-btn" data-close-modal="modal-admin-manage">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="manage-complaint-id">
+
+        <!-- Complaint Info Header -->
+        <div style="background: var(--slate-50); border: 1px solid var(--slate-200); border-radius: var(--radius-md); padding: 1rem; margin-bottom: 1.25rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <span id="manage-info-id" style="font-family: monospace; font-weight: 700; color: var(--primary-800);">CMP-XXXX</span>
+            <div id="manage-info-badges" style="display: flex; gap: 0.35rem;"></div>
+          </div>
+          <h4 id="manage-info-subject" style="font-size: 1rem; color: var(--slate-900); margin-bottom: 0.35rem;">Subject</h4>
+          <p id="manage-info-desc" style="font-size: 0.8125rem; color: var(--slate-600); line-height: 1.45;"></p>
+          <div style="margin-top: 0.5rem; font-size: 0.75rem; color: var(--slate-400);">
+            <span id="manage-info-student">Student</span> • <span id="manage-info-location">Location</span> • <span id="manage-info-date">Date</span>
+          </div>
+        </div>
+
+        <!-- AI Suggested Action -->
+        <div style="background: #f5f3ff; border: 1px solid #ddd6fe; border-radius: var(--radius-md); padding: 0.85rem 1rem; margin-bottom: 1.25rem; font-size: 0.8125rem;">
+          <strong style="color: #6d28d9;">🤖 AI Recommended Action:</strong>
+          <p id="manage-info-action" style="color: #5b21b6; margin-top: 0.25rem;"></p>
+        </div>
+
+        <!-- Update Status Field -->
+        <div class="form-group" style="margin-bottom: 1.25rem;">
+          <label class="form-label" for="manage-select-status">
+            Update Workflow Status <span class="req">*</span>
+          </label>
+          <select id="manage-select-status" class="form-control">
+            <option value="Pending">Pending (Under Initial Review)</option>
+            <option value="In Progress">In Progress (Work Order Dispatched)</option>
+            <option value="Resolved">Resolved (Work Completed & Verified)</option>
+          </select>
+        </div>
+
+        <!-- Admin Remarks / Resolution Notes -->
+        <div class="form-group">
+          <label class="form-label" for="manage-textarea-remarks">
+            Administrator Remarks / Resolution Notes
+            <span class="form-hint">Visible to students on the tracking portal</span>
+          </label>
+          <textarea id="manage-textarea-remarks" class="form-control" rows="3" placeholder="e.g. Technician Ramesh assigned on Oct 12. Valve replaced and tested."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer" style="justify-content: space-between;">
+        <button id="btn-admin-delete-complaint" class="btn btn-danger btn-sm">
+          🗑️ Delete Record
+        </button>
+        <div style="display: flex; gap: 0.5rem;">
+          <button class="btn btn-secondary" data-close-modal="modal-admin-manage">Cancel</button>
+          <button id="btn-save-admin-update" class="btn btn-primary">
+            💾 Save Changes
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-content">
+      <div>
+        <strong>SmartResolve AI</strong> – College Student Complaint Management System
+        <div style="color: var(--slate-400); margin-top: 0.2rem;">
+          Demonstrating client-side Explainable AI Triage & LocalStorage Persistence.
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="#dashboard" data-tab="dashboard">Dashboard</a>
+        <a href="#submit" data-tab="submit">Submit Complaint</a>
+        <a href="#track" data-tab="track">Track Status</a>
+        <a href="#admin" data-tab="admin">Admin Portal</a>
+        <a href="#about-ai" data-tab="about-ai">AI Design</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/aiAnalysis.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
